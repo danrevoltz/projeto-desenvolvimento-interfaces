@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🥋 Arte Suave Jiu-Jitsu — Desenvolvimento de Interfaces
 
 Projeto desenvolvido para a disciplina **Desenvolvimento de Interfaces** (CEUB — Prof. Dr. Felipe Batista da Silva) por **Daniel de Jesus Dias (RA: 22609661)**[cite: 1, 21].
@@ -60,3 +61,6 @@ arte-suave-jiu-jitsu/
 │   ├── carrossel-2.jpg
 │   └── carrossel-3.jpg
 └── README.md
+=======
+# projeto-desenvolvimento-interfaces
+>>>>>>> 7324b2e8c76d3c2ccf434025c37fa48c1a025362
