@@ -1,0 +1,348 @@
+/* 1. Variáveis: Tema Escuro Padrão + Contraste WCAG */
+:root,
+[data-bs-theme="dark"] {
+  --bg: #0a0a0a;
+  --bg-secundario: #121212;
+  --card: #171717;
+  --texto: #f5f5f5;
+  --mudo: #b3b3b3; /* Contraste > 7:1 sobre #0a0a0a (WCAG AAA) */
+  --ouro: #d97706;
+  --ouro-claro: #f5c542;
+  --ouro-texto: #f5c542;
+  --borda: #262626;
+  --header-bg: rgba(10, 10, 10, 0.88);
+  --hero-bg: radial-gradient(ellipse at 20% 100%, rgba(217, 119, 6, 0.28), transparent 55%),
+             radial-gradient(ellipse at 85% 0%, rgba(255, 255, 255, 0.07), transparent 50%),
+             linear-gradient(180deg, #141414, #0a0a0a);
+
+  --bs-body-bg: #0a0a0a;
+  --bs-body-color: #f5f5f5;
+  --bs-border-color: #262626;
+}
+
+/* Tema Claro (Acessibilidade WCAG AA/AAA) */
+[data-bs-theme="light"] {
+  --bg: #f8f9fa;
+  --bg-secundario: #ffffff;
+  --card: #ffffff;
+  --texto: #171717;
+  --mudo: #4b5563; /* Contraste > 7:1 sobre #ffffff (WCAG AAA) */
+  --ouro: #b45309;
+  --ouro-claro: #f5c542;
+  --ouro-texto: #92400e; /* Âmbar escuro para leitura perfeita no fundo claro */
+  --borda: #d1d5db;
+  --header-bg: rgba(255, 255, 255, 0.92);
+  --hero-bg: radial-gradient(ellipse at 20% 100%, rgba(217, 119, 6, 0.18), transparent 60%),
+             linear-gradient(180deg, #ffffff, #f3f4f6);
+
+  --bs-body-bg: #f8f9fa;
+  --bs-body-color: #171717;
+  --bs-border-color: #d1d5db;
+}
+
+/* 2. Base e Acessibilidade */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px; /* Base controlada pelo JS de acessibilidade */
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--texto);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.6;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Skip Link para leitores de tela e teclado (WCAG 2.4.1) */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  background: var(--ouro-claro);
+  color: #111;
+  padding: 0.5rem 1rem;
+  font-weight: 700;
+  border-radius: 6px;
+  z-index: 9999;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Foco visível em todos os elementos interativos (WCAG 2.4.7) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--ouro-claro);
+  outline-offset: 2px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+section {
+  scroll-margin-top: 110px;
+}
+
+.secao {
+  padding: 4.5rem 0;
+}
+
+.text-gold {
+  color: var(--ouro-texto);
+}
+
+.text-mudo {
+  color: var(--mudo);
+}
+
+.hover-gold:hover {
+  color: var(--ouro-texto) !important;
+}
+
+/* Barra de Acessibilidade */
+.barra-acessibilidade {
+  background: var(--bg-secundario);
+  border-color: var(--borda) !important;
+}
+
+/* 3. Cabeçalho */
+header.sticky-top {
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--borda);
+}
+
+/* 4. Botões personalizados */
+.btn-gold {
+  --bs-btn-bg: var(--ouro-claro);
+  --bs-btn-border-color: var(--ouro-claro);
+  --bs-btn-color: #111111;
+  --bs-btn-hover-bg: var(--ouro);
+  --bs-btn-hover-border-color: var(--ouro);
+  --bs-btn-hover-color: #ffffff;
+  background: var(--ouro-claro);
+  color: #111111;
+  border: 1px solid var(--ouro-claro);
+}
+
+.btn-outline-gold {
+  --bs-btn-color: var(--ouro-texto);
+  --bs-btn-border-color: var(--ouro);
+  --bs-btn-hover-bg: var(--ouro-claro);
+  --bs-btn-hover-border-color: var(--ouro-claro);
+  --bs-btn-hover-color: #111111;
+  color: var(--ouro-texto);
+  border: 1px solid var(--ouro);
+}
+
+/* 5. Hero */
+.hero {
+  position: relative;
+  padding: 6rem 0;
+  border-bottom: 1px solid rgba(217, 119, 6, 0.35);
+  background: var(--hero-bg);
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, var(--ouro), transparent);
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 5.2vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  max-width: 860px;
+  margin-inline: auto;
+}
+
+:where(.hero em) {
+  font-style: normal;
+  color: var(--ouro-texto);
+}
+
+.hero .lead {
+  max-width: 640px;
+  margin: 1.2rem auto 2rem;
+  color: var(--mudo);
+  font-size: 1.1rem;
+}
+
+/* 6. Títulos de seção */
+.titulo-secao {
+  font-size: 1.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 2rem;
+  position: relative;
+  padding-bottom: 0.6rem;
+}
+
+.titulo-secao::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 48px;
+  height: 3px;
+  background: var(--ouro);
+}
+
+/* 7. Cards das Aulas COM IMAGENS */
+.card-aula {
+  position: relative;
+  min-height: 340px;
+  overflow: hidden;
+  border: 1px solid rgba(217, 119, 6, 0.45);
+  border-radius: 14px;
+  background-color: #111;
+}
+
+.card-aula-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.card-aula:hover .card-aula-img {
+  transform: scale(1.07);
+}
+
+/* Camada escura em degradê sobre a foto para leitura com alto contraste */
+.card-aula::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.94) 15%, rgba(0, 0, 0, 0.45) 60%, rgba(0, 0, 0, 0.25) 100%);
+  z-index: 1;
+}
+
+.card-aula .card-body {
+  z-index: 2;
+}
+
+.badge-gold {
+  background-color: var(--ouro-claro);
+  color: #111111;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+/* 8. Cartões Explicativos */
+.card-explicativo {
+  background: var(--card);
+  border: 1px solid var(--borda);
+  border-radius: 14px;
+}
+
+.icone-destaque {
+  font-size: 2rem;
+}
+
+/* 9. Carrossel de Estrutura */
+.carrossel-img {
+  height: 440px;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .carrossel-img {
+    height: 280px;
+  }
+}
+
+/* 10. Tabela de Horários */
+.tabela-horarios {
+  --bs-table-bg: var(--card);
+  --bs-table-striped-bg: rgba(217, 119, 6, 0.06);
+  --bs-table-color: var(--texto);
+  --bs-table-border-color: var(--borda);
+}
+
+.tabela-horarios th {
+  color: var(--ouro-texto);
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  padding: 1rem;
+}
+
+.tabela-horarios td {
+  padding: 1rem;
+}
+
+/* 11. Planos */
+.card-plano {
+  background: var(--card);
+  border: 1px solid var(--borda);
+  border-radius: 14px;
+}
+
+.plano-destaque {
+  border-color: var(--ouro);
+}
+
+.selo-plano {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.lista-beneficios li {
+  padding: 0.4rem 0;
+  color: var(--texto);
+}
+
+.lista-beneficios li::before {
+  content: "✓ ";
+  color: var(--ouro-texto);
+  font-weight: bold;
+  margin-right: 0.4rem;
+}
+
+/* 12. Formulário */
+.form-control,
+.form-select {
+  background-color: var(--card);
+  border-color: var(--borda);
+  color: var(--texto);
+}
+
+.form-control:focus,
+.form-select:focus {
+  background-color: var(--card);
+  color: var(--texto);
+  border-color: var(--ouro);
+  box-shadow: 0 0 0 0.2rem rgba(217, 119, 6, 0.25);
+}
+
+.form-check-input:checked {
+  background-color: var(--ouro);
+  border-color: var(--ouro);
+}
