@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="pt-BR" data-bs-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Arte Suave Jiu-Jitsu</title>
+
+  <!-- 1. Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- 2. CSS Personalizado (Tema Dark/Light & Gold + Acessibilidade WCAG) -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- 3. Tailwind CSS (com prefixo tw- e sem preflight para conviver com Bootstrap) -->
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script>
+    tailwind.config = {
+      prefix: "tw-",
+      corePlugins: { preflight: false }
+    };
+  </script>
+</head>
+<body>
+
+  <!-- Link de Pular para Conteúdo (Acessibilidade WCAG) -->
+  <a href="#conteudo-principal" class="skip-link">Pular para o conteúdo principal</a>
+
+  <!-- Barra Superior de Acessibilidade -->
+  <div class="barra-acessibilidade py-1 border-bottom" role="region" aria-label="Ferramentas de Acessibilidade">
+    <div class="container d-flex flex-wrap justify-content-between align-items-center gap-2 small">
+      <span class="text-mudo">Acessibilidade (WCAG):</span>
+      <div class="d-flex align-items-center gap-2">
+        <button type="button" class="btn btn-sm btn-outline-gold py-0 px-2" id="btn-diminuir-fonte" aria-label="Diminuir tamanho da fonte">A-</button>
+        <button type="button" class="btn btn-sm btn-outline-gold py-0 px-2" id="btn-resetar-fonte" aria-label="Tamanho padrão da fonte">A</button>
+        <button type="button" class="btn btn-sm btn-outline-gold py-0 px-2" id="btn-aumentar-fonte" aria-label="Aumentar tamanho da fonte">A+</button>
+        <span class="mx-1 text-mudo">|</span>
+        <button type="button" class="btn btn-sm btn-gold py-0 px-2 fw-semibold" id="btn-tema" aria-pressed="false">
+          ☀️ Modo Claro
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cabeçalho fixo -->
+  <header class="sticky-top">
+    <nav class="navbar navbar-expand-lg tw-backdrop-blur-md" aria-label="Navegação principal">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="#hero">
+          ARTE SUAVE <span class="text-gold">JIU-JITSU</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Abrir menu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menu">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item"><a class="nav-link" href="#aulas">Aulas</a></li>
+            <li class="nav-item"><a class="nav-link" href="#estrutura">Estrutura</a></li>
+            <li class="nav-item"><a class="nav-link" href="#horarios">Horários</a></li>
+            <li class="nav-item"><a class="nav-link" href="#planos">Planos</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contato">Contato</a></li>
+          </ul>
+          <div class="d-flex gap-2 mt-2 mt-lg-0">
+            <button type="button" class="btn btn-outline-gold btn-sm text-uppercase fw-semibold" data-bs-toggle="modal" data-bs-target="#modalLogin">
+              Área do Aluno
+            </button>
+            <a class="btn btn-gold btn-sm text-uppercase fw-semibold" href="#contato">Aula Experimental</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main id="conteudo-principal">
+    <!-- Seção Hero -->
+    <section id="hero" class="hero text-center">
+      <div class="container">
+        <span class="selo tw-inline-block tw-rounded-full tw-border tw-border-amber-500/40 tw-bg-amber-500/10 tw-px-4 tw-py-1 tw-text-xs tw-uppercase tw-tracking-widest tw-text-amber-400">
+          Academia de Jiu-Jitsu
+        </span>
+        <h1 class="mt-4">
+          A ARTE SUAVE QUE TRANSFORMA
+          <em class="tw-bg-gradient-to-r tw-from-amber-400 tw-to-amber-600 tw-bg-clip-text tw-text-transparent">MENTE E CORPO</em>
+        </h1>
+        <p class="lead">
+          Desenvolva autoconfiança, disciplina e alta performance com a metodologia exclusiva da Arte Suave Jiu-Jitsu. Do iniciante ao competidor profissional.
+        </p>
+        <div class="d-flex flex-column flex-sm-row justify-content-center gap-3">
+          <a class="btn btn-gold btn-lg text-uppercase fw-semibold" href="#contato">Agendar aula grátis</a>
+          <a class="btn btn-outline-gold btn-lg text-uppercase fw-semibold" href="#planos">Conhecer planos</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção Nossas Aulas (COM IMAGENS + ABAS DE PESQUISA/FILTRO) -->
+    <section id="aulas" class="secao">
+      <div class="container">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4 gap-3">
+          <div>
+            <h2 class="titulo-secao mb-0">Nossas Aulas</h2>
+          </div>
+
+          <!-- Aba / Barra de Pesquisa e Filtro -->
+          <div class="d-flex flex-column flex-sm-row gap-2" role="search" aria-label="Pesquisar modalidades">
+            <input type="search" id="campo-pesquisa" class="form-control form-control-sm" placeholder="Buscar aula ou nível..." aria-label="Buscar aula ou nível">
+            <div class="btn-group btn-group-sm" role="group" aria-label="Filtrar por categoria">
+              <button type="button" class="btn btn-gold filtro-btn active" data-filtro="todos">Todas</button>
+              <button type="button" class="btn btn-outline-gold filtro-btn" data-filtro="iniciante">Iniciante</button>
+              <button type="button" class="btn btn-outline-gold filtro-btn" data-filtro="avancado">Avançado</button>
+              <button type="button" class="btn btn-outline-gold filtro-btn" data-filtro="kids">Kids</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-4" id="lista-aulas">
+          <!-- Card 1: Fundamentos -->
+          <div class="col-md-6 col-lg-4 item-aula" data-categoria="iniciante" data-texto="jiu-jitsu fundamentos faixa branca base tecnica defesa pessoal iniciante">
+            <article class="card card-aula h-100 tw-transition tw-duration-300 hover:-tw-translate-y-2 hover:tw-shadow-2xl hover:tw-shadow-amber-500/20">
+              <img src="img/aula-fundamentos.jpg"
+                   onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1555597673-b21d5c935865?auto=format&fit=crop&w=800&q=80';"
+                   class="card-aula-img"
+                   alt="Dois praticantes treinando posições básicas de Jiu-Jitsu no tatame">
+              <div class="card-body d-flex flex-column justify-content-end position-relative">
+                <span class="badge badge-gold position-absolute top-0 start-0 m-3 text-uppercase">Faixa Branca</span>
+                <h3 class="card-title h5 fw-bold text-uppercase text-white">Jiu-Jitsu Fundamentos</h3>
+                <p class="card-text text-light opacity-75 mb-0">Base técnica, posições e defesa pessoal para quem está começando.</p>
+              </div>
+            </article>
+          </div>
+
+          <!-- Card 2: Avançado -->
+          <div class="col-md-6 col-lg-4 item-aula" data-categoria="avancado" data-texto="jiu-jitsu avancado faixa azul guarda passagem competicao alto rendimento">
+            <article class="card card-aula h-100 tw-transition tw-duration-300 hover:-tw-translate-y-2 hover:tw-shadow-2xl hover:tw-shadow-amber-500/20">
+              <img src="img/aula-avancado.jpg"
+                   onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1564415315949-7a0c4c73aab4?auto=format&fit=crop&w=800&q=80';"
+                   class="card-aula-img"
+                   alt="Atletas de Jiu-Jitsu avançado em treino de competição">
+              <div class="card-body d-flex flex-column justify-content-end position-relative">
+                <span class="badge badge-gold position-absolute top-0 start-0 m-3 text-uppercase">Faixa Azul+</span>
+                <h3 class="card-title h5 fw-bold text-uppercase text-white">Jiu-Jitsu Avançado</h3>
+                <p class="card-text text-light opacity-75 mb-0">Guarda, passagem e competição com foco em alto rendimento.</p>
+              </div>
+            </article>
+          </div>
+
+          <!-- Card 3: Kids -->
+          <div class="col-md-6 col-lg-4 item-aula" data-categoria="kids" data-texto="kids jiu-jitsu 4 a 12 anos criancas disciplina respeito diversao">
+            <article class="card card-aula h-100 tw-transition tw-duration-300 hover:-tw-translate-y-2 hover:tw-shadow-2xl hover:tw-shadow-amber-500/20">
+              <img src="img/aula-kids.jpg"
+                   onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1517438476312-10d79c077509?auto=format&fit=crop&w=800&q=80';"
+                   class="card-aula-img"
+                   alt="Crianças treinando artes marciais com supervisão de professor">
+              <div class="card-body d-flex flex-column justify-content-end position-relative">
+                <span class="badge badge-gold position-absolute top-0 start-0 m-3 text-uppercase">4 a 12 anos</span>
+                <h3 class="card-title h5 fw-bold text-uppercase text-white">Kids Jiu-Jitsu</h3>
+                <p class="card-text text-light opacity-75 mb-0">Disciplina, respeito e diversão para as crianças.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- Mensagem caso a busca não encontre nada -->
+        <p id="sem-resultados" class="text-center text-mudo mt-4 d-none">
+          Nenhuma aula encontrada para esse termo. Tente buscar por "Fundamentos", "Avançado" ou "Kids".
+        </p>
+      </div>
+    </section>
+
+    <!-- Seção Cartões Explicativos (Metodologia e Benefícios) -->
+    <section id="diferenciais" class="secao pt-0">
+      <div class="container">
+        <h2 class="titulo-secao">Por que treinar conosco</h2>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <article class="card card-explicativo h-100 p-4">
+              <div class="icone-destaque mb-3" aria-hidden="true">🥋</div>
+              <h3 class="h5 fw-bold">Metodologia Estruturada</h3>
+              <p class="text-mudo mb-0">Cronograma progressivo dividido por módulos técnicos, garantindo evolução segura desde a primeira aula na faixa branca.</p>
+            </article>
+          </div>
+          <div class="col-md-4">
+            <article class="card card-explicativo h-100 p-4">
+              <div class="icone-destaque mb-3" aria-hidden="true">🛡️</div>
+              <h3 class="h5 fw-bold">Ambiente Seguro e Inclusivo</h3>
+              <p class="text-mudo mb-0">Tatames olímpicos higienizados diariamente e cultura de respeito mútuo, ideal para homens, mulheres e crianças.</p>
+            </article>
+          </div>
+          <div class="col-md-4">
+            <article class="card card-explicativo h-100 p-4">
+              <div class="icone-destaque mb-3" aria-hidden="true">🏆</div>
+              <h3 class="h5 fw-bold">Professores Faixa-Preta</h3>
+              <p class="text-mudo mb-0">Equipe liderada por instrutores certificados pela CBJJ/IBJJF com experiência em defesa pessoal e competições.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção Carrossel de Imagens (Estrutura da Academia) -->
+    <section id="estrutura" class="secao">
+      <div class="container">
+        <h2 class="titulo-secao">Nossa Estrutura</h2>
+        <div id="carrosselAcademia" class="carousel slide rounded-4 overflow-hidden border border-secondary-subtle" data-bs-ride="carousel">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carrosselAcademia" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carrosselAcademia" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carrosselAcademia" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          </div>
+
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="img/carrossel-1.jpg"
+                   onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1400&q=80';"
+                   class="d-block w-100 carrossel-img"
+                   alt="Área principal de tatames da academia Arte Suave Jiu-Jitsu">
+              <div class="carousel-caption bg-dark bg-opacity-75 rounded-3 p-3">
+                <h3 class="h5 fw-bold text-gold mb-1">Tatame Olímpico de 200m²</h3>
+                <p class="small text-white mb-0">Amortecimento de alto impacto para treinos seguros e confortáveis.</p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="img/carrossel-2.jpg"
+                   onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1599058917212-d750089bc07e?auto=format&fit=crop&w=1400&q=80';"
+                   class="d-block w-100 carrossel-img"
+                   alt="Área de preparação física e condicionamento">
+              <div class="carousel-caption bg-dark bg-opacity-75 rounded-3 p-3">
+                <h3 class="h5 fw-bold text-gold mb-1">Preparação Física Integrada</h3>
+                <p class="small text-white mb-0">Equipamentos funcionais para força, mobilidade e resistência.</p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="img/carrossel-3.jpg"
+                   onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1400&q=80';"
+                   class="d-block w-100 carrossel-img"
+                   alt="Turma reunida após treino na academia">
+              <div class="carousel-caption bg-dark bg-opacity-75 rounded-3 p-3">
+                <h3 class="h5 fw-bold text-gold mb-1">Comunidade e Graduação</h3>
+                <p class="small text-white mb-0">Acompanhamento individual de frequência e evolução de faixas.</p>
+              </div>
+            </div>
+          </div>
+
+          <button class="carousel-control-prev" type="button" data-bs-target="#carrosselAcademia" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carrosselAcademia" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Próximo</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção Horários -->
+    <section id="horarios" class="secao">
+      <div class="container">
+        <h2 class="titulo-secao">Horários</h2>
+        <div class="table-responsive rounded-3 border border-secondary-subtle">
+          <table class="table table-striped tabela-horarios mb-0">
+            <thead>
+              <tr>
+                <th scope="col">Dias</th>
+                <th scope="col">Turma</th>
+                <th scope="col">Horários</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Seg • Qua • Sex</td>
+                <td>Fundamentos</td>
+                <td>06h30 • 12h00 • 19h00</td>
+              </tr>
+              <tr>
+                <td>Ter • Qui</td>
+                <td>Avançado</td>
+                <td>12h00 • 20h30</td>
+              </tr>
+              <tr>
+                <td>Ter • Qui</td>
+                <td>Kids (4 a 12 anos)</td>
+                <td>17h30</td>
+              </tr>
+              <tr>
+                <td>Sábado</td>
+                <td>Treino Livre</td>
+                <td>09h00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção Planos -->
+    <section id="planos" class="secao">
+      <div class="container">
+        <h2 class="titulo-secao">Planos</h2>
+        <div class="row g-4 align-items-center pt-2">
+          <!-- Plano Mensal -->
+          <div class="col-md-4">
+            <article class="card card-plano h-100 p-4 text-center">
+              <div class="card-body d-flex flex-column">
+                <h3 class="h6 text-mudo mb-2">Mensal</h3>
+                <div class="my-3">
+                  <span class="display-5 fw-bold preco-valor">R$ 220</span><small class="text-mudo">/mês</small>
+                </div>
+                <ul class="lista-beneficios text-start my-4 flex-grow-1">
+                  <li>Aulas ilimitadas</li>
+                  <li>Todas as turmas</li>
+                  <li>Sem fidelidade</li>
+                </ul>
+                <a href="#contato" class="btn btn-outline-gold w-100 text-uppercase fw-semibold">Escolher</a>
+              </div>
+            </article>
+          </div>
+
+          <!-- Plano Trimestral (Destaque) -->
+          <div class="col-md-4">
+            <article class="card card-plano plano-destaque h-100 p-4 text-center position-relative tw-ring-2 tw-ring-amber-400 md:tw-scale-105">
+              <span class="badge badge-gold selo-plano text-uppercase px-3 py-1">Mais escolhido</span>
+              <div class="card-body d-flex flex-column">
+                <h3 class="h6 text-mudo mb-2">Trimestral</h3>
+                <div class="my-3">
+                  <span class="display-5 fw-bold preco-valor">R$ 190</span><small class="text-mudo">/mês</small>
+                </div>
+                <ul class="lista-beneficios text-start my-4 flex-grow-1">
+                  <li>Aulas ilimitadas</li>
+                  <li>Todas as turmas</li>
+                  <li>Acompanhamento de graduação</li>
+                </ul>
+                <a href="#contato" class="btn btn-gold w-100 text-uppercase fw-semibold">Escolher</a>
+              </div>
+            </article>
+          </div>
+
+          <!-- Plano Anual -->
+          <div class="col-md-4">
+            <article class="card card-plano h-100 p-4 text-center">
+              <div class="card-body d-flex flex-column">
+                <h3 class="h6 text-mudo mb-2">Anual</h3>
+                <div class="my-3">
+                  <span class="display-5 fw-bold preco-valor">R$ 160</span><small class="text-mudo">/mês</small>
+                </div>
+                <ul class="lista-beneficios text-start my-4 flex-grow-1">
+                  <li>Aulas ilimitadas</li>
+                  <li>Todas as turmas</li>
+                  <li>Melhor valor por mês</li>
+                </ul>
+                <a href="#contato" class="btn btn-outline-gold w-100 text-uppercase fw-semibold">Escolher</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção Contato / Agendamento -->
+    <section id="contato" class="secao">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-7">
+            <h2 class="titulo-secao">Agende sua aula experimental grátis</h2>
+            <form id="form" class="needs-validation" novalidate>
+              <div class="mb-3">
+                <label for="nome" class="form-label">Nome completo</label>
+                <input type="text" class="form-control" id="nome" placeholder="Seu nome" required>
+                <div class="invalid-feedback">Informe seu nome completo (mínimo 3 letras).</div>
+              </div>
+
+              <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                  <label for="tel" class="form-label">WhatsApp</label>
+                  <input type="tel" class="form-control" id="tel" placeholder="(DDD) número" required>
+                  <div class="invalid-feedback">Informe um número válido com DDD.</div>
+                </div>
+                <div class="col-md-6">
+                  <label for="modalidade" class="form-label">Modalidade</label>
+                  <select class="form-select" id="modalidade" required>
+                    <option value="Fundamentos" selected>Fundamentos</option>
+                    <option value="Avançado">Avançado</option>
+                    <option value="Kids (4 a 12 anos)">Kids (4 a 12 anos)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-check mb-4">
+                <input class="form-check-input" type="checkbox" id="aceite" required>
+                <label class="form-check-label" for="aceite">
+                  Aceito receber contato por WhatsApp
+                </label>
+                <div class="invalid-feedback">Marque para podermos confirmar sua aula.</div>
+              </div>
+
+              <button type="submit" class="btn btn-gold w-100 py-2 text-uppercase fw-bold">Quero treinar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Rodapé -->
+  <footer class="py-4 border-top border-secondary-subtle text-center text-mudo small">
+    <div class="container">
+      <p class="mb-2">© 2026 Arte Suave Jiu-Jitsu • Rua Exemplo, 123 • (00) 00000-0000</p>
+      <div class="d-flex justify-content-center gap-3">
+        <a href="#contato" class="text-mudo text-decoration-none hover-gold">Instagram</a>
+        <a href="#contato" class="text-mudo text-decoration-none hover-gold">WhatsApp</a>
+        <a href="#contato" class="text-mudo text-decoration-none hover-gold">YouTube</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal de Confirmação de Agendamento -->
+  <div class="modal fade" id="modalOk" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold" id="modalTitle">Aula agendada!</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+          <p id="modalTxt" class="mb-0"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-gold text-uppercase fw-semibold" data-bs-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal / Página de Login (Área do Aluno) -->
+  <div class="modal fade" id="modalLogin" tabindex="-1" aria-labelledby="modalLoginTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold" id="modalLoginTitle">Área do Aluno — Login</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <form id="formLogin" class="needs-validation" novalidate>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="loginEmail" class="form-label">E-mail cadastrado</label>
+              <input type="email" class="form-control" id="loginEmail" placeholder="aluno@artesuave.com.br" required>
+              <div class="invalid-feedback">Informe um e-mail válido.</div>
+            </div>
+            <div class="mb-3">
+              <label for="loginSenha" class="form-label">Senha</label>
+              <input type="password" class="form-control" id="loginSenha" placeholder="••••••••" minlength="6" required>
+              <div class="invalid-feedback">A senha deve ter pelo menos 6 caracteres.</div>
+            </div>
+            <div id="loginFeedback" class="alert alert-success py-2 small d-none" role="status"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-gold text-uppercase fw-semibold">Entrar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap 5.3 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- JavaScript Personalizado -->
+  <script src="js/script.js"></script>
+</body>
+</html>
